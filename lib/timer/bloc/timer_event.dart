@@ -1,50 +1,33 @@
 part of 'timer_bloc.dart';
 
-@immutable
 abstract class TimerEvent extends Equatable {
-  const TimerEvent([List props = const []]) : super();
+  const TimerEvent();
+
+  @override
+  List<Object> get props => [];
 }
 
-class Start extends TimerEvent {
+class TimerStarted extends TimerEvent {
+  const TimerStarted({required this.duration});
+  final int duration;
+}
+
+class TimerPaused extends TimerEvent {
+  const TimerPaused();
+}
+
+class TimerResumed extends TimerEvent {
+  const TimerResumed();
+}
+
+class TimerReset extends TimerEvent {
+  const TimerReset();
+}
+
+class TimerTicked extends TimerEvent {
+  const TimerTicked({required this.duration});
   final int duration;
 
-  Start({required this.duration}) : super([duration]);
-
   @override
-  String toString() => "Start { duration: $duration }";
-
-  @override
-  List<Object?> get props => [duration];
-}
-
-class Pause extends TimerEvent {
-  @override
-  String toString() => "Pause";
-  @override
-  List<Object?> get props => [];
-}
-
-class Resume extends TimerEvent {
-  @override
-  String toString() => "Resume";
-  @override
-  List<Object?> get props => [];
-}
-
-class Reset extends TimerEvent {
-  @override
-  String toString() => "Reset";
-  @override
-  List<Object?> get props => [];
-}
-
-class Tick extends TimerEvent {
-  final int duration;
-
-  Tick({required this.duration}) : super([duration]);
-
-  @override
-  String toString() => "Tick { duration: $duration }";
-  @override
-  List<Object?> get props => [duration];
+  List<Object> get props => [duration];
 }
